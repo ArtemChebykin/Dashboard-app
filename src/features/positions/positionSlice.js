@@ -1,4 +1,12 @@
-export const selectAllPositions = (state) => state.positions;
+import { createSlice } from "@reduxjs/toolkit";
+
+const positionSlice = createSlice({
+  name: "positions",
+  initialState: [],
+  reducers: {
+    addPositions: (_, action) => action.payload,
+  },
+});
 
 export const selectVisiblePositions = (state, filters = []) => {
   if (filters.length === 0) return state.positions;
@@ -13,3 +21,6 @@ export const selectVisiblePositions = (state, filters = []) => {
     return filters.every((filter) => posFilters.includes(filter));
   });
 };
+
+export const { addPositions } = positionSlice.actions;
+export const positionReducer = positionSlice.reducer;
